@@ -1,4 +1,5 @@
 # DAI-MOM system
+
 # System Overview
 
 The DAI system developed with RMI (Java) technology is based on a MOM structure, featuring its own Broker along with multiple consumers and producers, while incorporating a series of AI agents that enable intelligent and automatic message filtering before they reach the consumers. Messages that do not meet the established criteria are discarded and are not published to the message queues of the designated channel, ensuring that only valid and secure messages reach the consumers.
