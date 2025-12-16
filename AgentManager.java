@@ -6,6 +6,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * Coordina la ejecución de múltiples agentes IA
  */
 public class AgentManager {
+    // Cada vez que se modifica la lista de agentes, se crea una nueva copia (thread-safe)
     private final CopyOnWriteArrayList<MessageFilterAgent> agentes = new CopyOnWriteArrayList<>();
     private boolean habilitado = true;
     

@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
  * Detecta contenido malicioso o inapropiado
  */
 public class ContentAnalysisAgent implements MessageFilterAgent {
+    // Ponerlo de forma implicita pq sino da warning y si cambiamos la clase puede fallar la deserializacion
     private static final long serialVersionUID = 1L;
     
     // Patrones regex para detectar contenido sospechoso
@@ -57,7 +58,7 @@ public class ContentAnalysisAgent implements MessageFilterAgent {
             .filter(c -> !Character.isLetterOrDigit(c) && !Character.isWhitespace(c))
             .count();
         
-        if (caracteresEspeciales > mensaje.length() * 0.3) {
+        if (caracteresEspeciales > mensaje.length() * 0.3) { // Más del 30% de caracteres especiales
             System.out.println("[CONTENT ANALYSIS] Message rejected: too many special characters");
             return false;
         }

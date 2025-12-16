@@ -9,6 +9,7 @@ import java.util.UUID;
  * Cliente consumidor que se conecta a un MessageBroker para recibir mensajes de una cola.
  */
 public class ConsumerImpl extends UnicastRemoteObject implements Consumer, ConsumerCallback {
+    // Ponerlo de forma implicita pq sino da warning y si cambiamos la clase puede fallar la deserializacion
     private static final long serialVersionUID = 1L;
     private final String consumerId;
     private String nombreCola; // Para almacenar el nombre de la cola de la que se están consumiendo mensajes
@@ -237,6 +238,7 @@ public class ConsumerImpl extends UnicastRemoteObject implements Consumer, Consu
                     // Terminamos si se interrumpe
                 }
             });
+            // El programa termina automáticamente cuando todos los hilos principales (no demonios) han finalizado
             monitorThread.setDaemon(true); // Hilo demonio que termina con el principal
             monitorThread.start();
             

@@ -2,6 +2,7 @@
  * Agente que filtra mensajes basándose en su longitud
  */
 public class LengthFilterAgent implements MessageFilterAgent {
+    // Ponerlo de forma implicita pq sino da warning y si cambiamos la clase puede fallar la deserializacion
     private static final long serialVersionUID = 1L;
     
     private final int longitudMinima;

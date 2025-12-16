@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Implementación de una cola de mensajes en el broker
  */
 public class MessageQueue implements Serializable {
+// Ponerlo de forma implicita pq sino da warning y si cambiamos la clase puede fallar la deserializacion
     private static final long serialVersionUID = 1L;
     
     // Mensaje con timestamp para control de expiración
@@ -53,9 +54,11 @@ public class MessageQueue implements Serializable {
     
     private String nombre;   // Nombre de la cola
     private boolean durable; // Si la cola es durable
-    private final ConcurrentLinkedQueue<MensajeTimestamp> mensajes = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<MensajeTimestamp> mensajes = new ConcurrentLinkedQueue<>(); // FIFO
     private final CopyOnWriteArrayList<ConsumerCallback> consumidores = new CopyOnWriteArrayList<>();
     private final Map<String, MensajeTimestamp> mensajesNoConfirmados = new ConcurrentHashMap<>();
+    // Rond robin --> igualdad de distribución entre consumidores
+    // Fair dispatch --> un consumidor no recibe otro mensaje hasta confirmar el anterior (optimo)
     private int currentConsumerIndex = 0; // Índice para round robin
     private boolean fairDispatch = true;  // Por defecto, activamos fair dispatch
     

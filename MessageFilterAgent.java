@@ -4,6 +4,9 @@ import java.io.Serializable;
  * Interfaz para agentes que filtran mensajes.
  * Los agentes deciden si un mensaje debe ser entregado o descartado.
  */
+
+// Permitir que las implementaciones de los agentes de filtrado puedan ser 
+                     // enviadas a través de RMI y ejecutadas en el broker
 public interface MessageFilterAgent extends Serializable {
     
     /**

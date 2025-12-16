@@ -5,6 +5,7 @@ import java.util.List;
  * Agente que filtra mensajes tipo spam basándose en palabras clave sospechosas
  */
 public class SpamFilterAgent implements MessageFilterAgent {
+    // Ponerlo de forma implicita pq sino da warning y si cambiamos la clase puede fallar la deserializacion        
     private static final long serialVersionUID = 1L;
     
     // Lista de palabras clave que identifican spam

@@ -14,9 +14,12 @@ import java.util.List;
  * Gestiona todas las colas de mensajes y sus operaciones básicas.
  */
 public class MessageBrokerImpl extends UnicastRemoteObject implements MessageBroker, Serializable {
+    // Ponerlo de forma implicita pq sino da warning y si cambiamos la clase puede fallar la deserializacion    
     private static final long serialVersionUID = 1L;
     private static MessageBroker instance;
+    // Mapa concurrente para gestionar las colas de mensajes (multi thread safe)
     private final ConcurrentMap<String, MessageQueue> queues = new ConcurrentHashMap<>();
+    // Crea un pool de un hilo dedicado a ejecutar tareas periódicas o con retraso
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     
     // Sistema de agentes para filtrado de mensajes
@@ -132,6 +135,7 @@ public class MessageBrokerImpl extends UnicastRemoteObject implements MessageBro
      */
     @Override
     public void declararCola(String nombreCola, boolean durable) throws RemoteException {
+        // Op. At. Si no hay una cola con este nombre, créala. Si ya existe, reutilízala
         queues.computeIfAbsent(nombreCola, k -> new MessageQueue(nombreCola, durable));
         System.out.println("Queue declared: " + nombreCola + " (durable: " + durable + ")");
     }

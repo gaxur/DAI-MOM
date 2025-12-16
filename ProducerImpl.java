@@ -9,10 +9,11 @@ import java.util.Scanner;
  * También se registra en RMI para poder ser contactado.
  */
 public class ProducerImpl extends UnicastRemoteObject implements Producer {
+    // Ponerlo de forma implicita pq sino da warning y si cambiamos la clase puede fallar la deserializacion    
     private static final long serialVersionUID = 1L;
     
     protected ProducerImpl() throws RemoteException {
-        super();
+        super(); // Llamada al constructor de UnicastRemoteObject
     }
     
     @Override

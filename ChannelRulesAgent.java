@@ -6,15 +6,16 @@ import java.util.regex.Pattern;
  * Agente que filtra mensajes basándose en reglas específicas por canal
  */
 public class ChannelRulesAgent implements MessageFilterAgent {
+    // Ponerlo de forma implicita pq sino da warning y si cambiamos la clase puede fallar la deserializacion
     private static final long serialVersionUID = 1L;
     
-    // Reglas específicas por canal
+    // Reglas específicas por canal (pattern --> reglas regex)
     private final Map<String, Pattern> reglasCanal = new HashMap<>();
     
     public ChannelRulesAgent() {
         // Configurar reglas por defecto para cada canal
         
-        // Solo mensajes de notificaciones del sistema
+        // Solo mensajes de notificaciones del sistema (da igual mayus/minus)
         reglasCanal.put("canal_NOTIFICACION", Pattern.compile(
             "^\\[NOTIFICACION\\].*", Pattern.CASE_INSENSITIVE
         ));
